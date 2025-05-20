@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Webhook" ALTER COLUMN "orderDirection" DROP NOT NULL,
+ALTER COLUMN "stopLoss" DROP NOT NULL,
+ALTER COLUMN "takeProfit" DROP NOT NULL;

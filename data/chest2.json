@@ -1,0 +1,163 @@
+[
+{
+  "min_credit": 0,
+  "max_credit": 299,
+  "min_gold": 240,
+  "max_gold": 280,
+  "experience_point": 26
+},
+{
+  "min_credit": 300,
+  "max_credit": 599,
+  "min_gold": 330,
+  "max_gold": 385,
+  "experience_point": 29
+},
+{
+  "min_credit": 600,
+  "max_credit": 999,
+  "min_gold": 420,
+  "max_gold": 490,
+  "experience_point": 41
+},
+{
+  "min_credit": 1000,
+  "max_credit": 1299,
+  "min_gold": 480,
+  "max_gold": 560,
+  "experience_point": 52
+},
+{
+  "min_credit": 1300,
+  "max_credit": 1599,
+  "min_gold": 540,
+  "max_gold": 630,
+  "experience_point": 54
+},
+{
+  "min_credit": 1600,
+  "max_credit": 1999,
+  "min_gold": 630,
+  "max_gold": 735,
+  "experience_point": 66
+},
+{
+  "min_credit": 2000,
+  "max_credit": 2299,
+  "min_gold": 690,
+  "max_gold": 805,
+  "experience_point": 68
+},
+{
+  "min_credit": 2300,
+  "max_credit": 2599,
+  "min_gold": 780,
+  "max_gold": 910,
+  "experience_point": 80
+},
+{
+  "min_credit": 2600,
+  "max_credit": 2999,
+  "min_gold": 840,
+  "max_gold": 980,
+  "experience_point": 91
+},
+{
+  "min_credit": 3000,
+  "max_credit": 3399,
+  "min_gold": 900,
+  "max_gold": 1050,
+  "experience_point": 93
+},
+{
+  "min_credit": 3400,
+  "max_credit": 3799,
+  "min_gold": 990,
+  "max_gold": 1155,
+  "experience_point": 105
+},
+{
+  "min_credit": 3800,
+  "max_credit": 4199,
+  "min_gold": 1050,
+  "max_gold": 1225,
+  "experience_point": 107
+},
+{
+  "min_credit": 4200,
+  "max_credit": 4599,
+  "min_gold": 1140,
+  "max_gold": 1330,
+  "experience_point": 121
+},
+{
+  "min_credit": 4600,
+  "max_credit": 4999,
+  "min_gold": 1200,
+  "max_gold": 1400,
+  "experience_point": 130
+},
+{
+  "min_credit": 5000,
+  "max_credit": 5499,
+  "min_gold": 1260,
+  "max_gold": 1470,
+  "experience_point": 132
+},
+{
+  "min_credit": 5500,
+  "max_credit": 5999,
+  "min_gold": 1290,
+  "max_gold": 1505,
+  "experience_point": 133
+},
+{
+  "min_credit": 6000,
+  "max_credit": 6499,
+  "min_gold": 1320,
+  "max_gold": 1540,
+  "experience_point": 143
+},
+{
+  "min_credit": 6500,
+  "max_credit": 6999,
+  "min_gold": 1350,
+  "max_gold": 1575,
+  "experience_point": 144
+},
+{
+  "min_credit": 7000,
+  "max_credit": 7499,
+  "min_gold": 1380,
+  "max_gold": 1610,
+  "experience_point": 145
+},
+{
+  "min_credit": 7500,
+  "max_credit": 7999,
+  "min_gold": 1410,
+  "max_gold": 1645,
+  "experience_point": 146
+},
+{
+  "min_credit": 8000,
+  "max_credit": 8499,
+  "min_gold": 1440,
+  "max_gold": 1680,
+  "experience_point": 156
+},
+{
+  "min_credit": 8500,
+  "max_credit": 8999,
+  "min_gold": 1470,
+  "max_gold": 1715,
+  "experience_point": 157
+},
+{
+  "min_credit": 9000,
+  "max_credit": 9000,
+  "min_gold": 1500,
+  "max_gold": 1750,
+  "experience_point": 158
+}
+]

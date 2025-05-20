@@ -1,0 +1,52 @@
+[
+  {
+    "level": 3,
+    "winChance": 81,
+    "gold": 150
+  },
+  {
+    "level": 9,
+    "winChance": 82,
+    "gold": 350
+  },
+  {
+    "level": 17,
+    "winChance": 83,
+    "gold": 1000
+  },
+  {
+    "level": 23,
+    "winChance": 84,
+    "gold": 2400
+  },
+  {
+    "level": 32,
+    "winChance": 85,
+    "gold": 4500
+  },
+  {
+    "level": 41,
+    "winChance": 86,
+    "gold": 16000
+  },
+  {
+    "level": 48,
+    "winChance": 87,
+    "gold": 50000
+  },
+  {
+    "level": 53,
+    "winChance": 88,
+    "gold": 80000
+  },
+  {
+    "level": 57,
+    "winChance": 89,
+    "gold": 100000
+  },
+  {
+    "level": 60,
+    "winChance": 90,
+    "gold": 150000
+  }
+]

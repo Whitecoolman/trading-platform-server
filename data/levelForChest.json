@@ -1,0 +1,14 @@
+[
+  {
+    "min_level": 1,
+    "missionType": 1
+  },
+  {
+    "min_level": 20,
+    "missionType": 2
+  },
+  {
+    "min_level": 40,
+    "missionType": 3
+  }
+]

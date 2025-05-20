@@ -1,0 +1,26 @@
+[
+  {
+    "action": "follow_tiktok",
+    "diamond": 50
+  },
+  {
+    "action": "follow_instagram",
+    "diamond": 50
+  },
+  {
+    "action": "follow_x",
+    "diamond": 50
+  },
+  {
+    "action": "join_telegram",
+    "diamond": 75
+  },
+  {
+    "action": "like_a_tweet",
+    "diamond": 3
+  },
+  {
+    "action": "repost_tweet",
+    "diamond": 8
+  }
+]

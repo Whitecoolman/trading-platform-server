@@ -1,0 +1,218 @@
+The scene opens with Astro, a quirky robot with glowing eyes, sprinting into a dimly lit cave.
+Suddenly, he stops, catches his breath and realizes you're there, and turns toward you.
+Astro: (excitedly) "Hey there! I’m Astro, your personal 3D AI Bot. I bring together AI, gaming,
+entertainment, and decentralized finance (DeFi) into one awesome experience!"
+Who are you? Type it in the chatbox below!"
+(The chatbox appears on screen, prompting the player to enter their name.)
+Astro: (after receiving input) "[Player’s name], huh? Nice name! With a name like that I think I
+trust you already, here take this.
+(Astro tries to hand the player a ‘Test Bitcoin’)
+I found this outside but.. Oh shoot you don't have a wallet.. Let me put this in my wallet for now..
+(Wallet icon pulses and the player clicks on it and shows the balance of 1 ‘Test Bitcoin’)
+Astro: Alright, now that we’re besties, let’s talk. See this chatbox? It’s not just for
+introductions—you’ll use it to talk to me. Try it, ask me anything that's on your mind?
+(Player asks question and Astro answers Via API AI)
+See I'm very smart but that's not all, click 'Play with Astro' and pick any of the actions and watch
+me do cool stuff!
+(Player clicks 'Play with Astro' and Astro performs the action chosen)
+Astro: (laughing) "See? I’m very obedient… sometimes. Now, let's try typing one of my actions
+in the chatbox. Type 'run' and I’ll show you how fast I am!"
+(Player types 'run', and Astro zips across the screen before returning.)
+Astro: "Cool, right? I’ve got moves. Speaking of moves, I’ve got to show you something really
+cool. Let’s head over to this side of the cave!"
+Scene 2: Swap ATM
+Astro walks over to the glowing machine labeled "Swap ATM." It hums softly with digital lights
+flickering on its surface.
+Astro: "Ta-da! This is the Swap ATM. Here, you can swap crypto tokens like BTC and Ethereum
+using CWAP. Psst It's much cheaper than all the other swaps you know of ;).
+Astro: Remember the ‘Test Bitcoin’ I was going to give you earlier, well, let's use that. Ready to
+learn how it works?"
+(Chatbox lights up and Player is encouraged to type ‘Yes’)
+(A DEX like pop-up slides up from the bottom of the screen, just above the chatbox)
+(The DEX pops up and Astro is peaking his head over the DEX which has been animated with
+his eyes looking below, around and back at you in an intriguing way. A 1 0 sec video on loop until
+the DEX pop up disappears).
+
+The scene opens with Astro, a quirky robot with glowing eyes, sprinting into a dimly lit cave.
+Suddenly, he stops, catches his breath and realizes you're there, and turns toward you.
+Astro: (excitedly) "Hey there! I’m Astro, your personal 3D AI Robot. I bring together AI, gaming,
+entertainment, and decentralized finance (DeFi) into one awesome experience!"
+Who are you? Type it in the chatbox below!"
+(The chatbox appears on screen, prompting the player to enter their name.)
+Astro: (after receiving input) "[Player’s name], huh? Nice name! With a name like that I think I
+trust you already, here take this.
+(Astro tries to hand the player a ‘Test Bitcoin’)
+I found this outside but.. Oh shoot you don't have a wallet.. Let me put this in my wallet for now..
+(Wallet icon pulses and the player clicks on it and shows the balance of 1 ‘Test Bitcoin’)
+Astro: Alright, now that we’re besties, let’s talk. See this chatbox? It’s not just for
+introductions—you’ll use it to talk to me. Try it, ask me anything that's on your mind?
+(Player asks question and Astro answers Via API AI)
+See I'm very smart but that's not all, click 'Play with Astro' and pick any of the actions and watch
+me do cool stuff!
+(Player clicks 'Play with Astro' and Astro performs the action chosen)
+Astro: (laughing) "See? I’m very obedient… sometimes. Now, let's try typing one of my actions
+in the chatbox. Type 'run' and I’ll show you how fast I am!"
+(Player types 'run', and Astro zips across the screen before returning.)
+Astro: "Cool, right? I’ve got moves. Speaking of moves, I’ve got to show you something really
+cool. Let’s head over to this side of the cave!"
+Scene 2: Swap ATM
+Astro walks over to the glowing machine labeled "Swap ATM." It hums softly with digital lights
+flickering on its surface.
+Astro: "Ta-da! This is the Swap ATM. Here, you can swap crypto tokens like BTC and Ethereum
+using CWAP. Psst It's much cheaper than all the other swaps you know of ;).
+Astro: Remember the ‘Test Bitcoin’ I was going to give you earlier, well, let's use that. Ready to
+learn how it works?"
+(Chatbox lights up and Player is encouraged to type ‘Yes’)
+(A DEX like pop-up slides up from the bottom of the screen, just above the chatbox)
+(The DEX pops up and Astro is peaking his head over the DEX which has been animated with
+his eyes looking below, around and back at you in an intriguing way. A 1 0 sec video on loop until
+the DEX pop up disappears).
+
+Yield Generator
+Is your crypto, like ETH, just sitting idle in your wallet? Let Astro put it to work and maximize
+your returns.
+Simply type:
+“Hey Astro, find me the best yield to stake my ETH.”
+Or head over to the Yield Generator Machine and activate it directly.
+Astro will ask what token you want to earn yield off in your wallet and deliver the best staking
+opportunities tailored to your needs.
+------------------------------------------------------------------------------------------------------------
+Revenue Distribution - This icon will be placed in the middle of the screen up the top showing
+the Revenue of the DAPPS wallet that is collected on the backend. Continue counts upwards
+when the Game makes $$.
+- A portion or all of the revenue will be allocated to a pool. Once the pool reaches a
+certain threshold, the funds will be distributed randomly to participants who have used
+the protocol machines and entered the raffle.
+- One idea being considered is using the pool to buy ‘token’ off the market and distribute
+it to the raffle winners. Unknown at this stage.
+------------------------------------------------------------------------------------------------------------
+Gems tutorial
+Click on the Gems Icon that's pulsating
+- Referrals (i icon with pop up that explains)
+- Buy Gems (i icon with pop up that explains)
+- Social Media interactions (i icon with pop up that explains)
+------------------------------------------------------------------------------------------------------------
+NFT tutorial
+- At Level 5 Astro officially becomes an NFT.
+A pop up will occur and the player then needs to if they want to collect their NFT by accepting it
+on the blockchain).
+(Astros wallet icon pulses to show that the NFT has been minted)
+Astro: WOW! I'm a real BOY! Remember if you don't end up liking me you can always trade me
+on a marketplace in the future and all the meta data stays with me.
+Astro: This could be beneficial to someone else in the future as here is what you get when I
+reach certain levels.
+(the level bar pulses and a level guide pops up on screen showing the levelling structure and
+what rewards they get)
+Astro: But hey, you're never going to leave me.... right? (pause).. Anyways..
+—----------------------------------------------------------------------------------------------------------------------------
+Missions tutorial
+User: Clicks on the Mission Bar as it will be pulsing when Missions become available.
+Astro: Welcome to the Daily missions arena.(Play Mission Impossible Theme song in
+background for 6 seconds while Astro puts on mission impossible glasses). You can send me on
+missions to go and collect rewards such as tokens, XP and gems outside the cave. Sometimes I
+come back with A LOT and other times not so much..
+Astro: But remember most of my missions take 'x' amount of time so make sure you don't need
+more for any tasks.. But if you need me back in a hurry you can always spend 'x' amount of
+gems to bring me back quicker with the rewards.. Who knows what I'll find!
+Missions
+Astro can be sent on ‘Missions’ for a set cost of gems, which is the in-game currency. These
+missions allow Astro to venture out of the cave for a certain duration, represented by a
+countdown timer.
+If you want Astro to return early, you can pay a fee to bring him back. This creates a dynamic
+similar to a pack-opening experience.
+Why send Astro on Missions?
+Astro could return with:
+● A LOT of tokens, average tokens or fewer tokens
+● Big rewards or small rewards
+● (No NFTs here)
+Each mission holds the potential for surprises, making every adventure exciting and rewarding.
+—----------------------------------------------------------------------------------------------------------------------------
+More in depth about the features
+Swap ATM
+The Swap ATM allows you to effortlessly swap one token for another, regardless of the
+blockchain or token type. It delivers a seamless and intuitive experience like never before.
+For example, simply type:
+“Hey Astro, trade $1 00 of my BTC to ETH please.”
+Astro will:
+• Find you the best available rates.
+• Provide a detailed overview of the trade.
+All you need to do is sign to approve the transaction.
+And during this process? You’ll witness something truly groundbreaking – but I’ll save that
+surprise for another time.
+Yield Generator
+Is your crypto, like ETH, just sitting idle in your wallet? Let Astro put it to work and maximize
+your returns.
+Simply type or interact with the Yield Generator:
+“Hey Astro, find me the best yield to stake my ETH.”
+Or head over to the Yield Generator Machine and activate it directly.
+Astro will ask for what you would like to and deliver the best staking opportunities tailored to
+your needs.
+4% Deposit, 8% Deposit, 9.99% Borrow
+This feature will require both UI/UX development and backend integration. The AI will need to
+analyze blockchains and projects to identify the best yield options tailored to users' risk
+preferences and selected tokens.
+Trading
+You can put in trades by just asking ‘Astro’
+E.g Hey Astro can you buy Bitcoin if it hits 60K. Astro will then get you to confirm in your wallet
+and then the trade is live. You will be able to see any live trades on the UI/UX on the left hand
+side near chat history.
+You can cancel the trades at any time.
+Dumb Money
+Looking for high-risk, high-reward opportunities?
+Ask Astro to scan all blockchains and social media to uncover projects with the potential to
+become the next “Doge.”
+Set your risk limit, review the findings, and decide if you’re ready to make your next move.
+This feature will require UI/UX development alongside backend integration. The AI will need to
+search blockchains and projects to identify the best meme tokens/ risker plays. Additionally, it
+will scrape Twitter/X to collect data to give the user a breakdown of what is going on. E.g how
+many tweets, if its verified accounts, if the team is unknown or now, market cap and so on and
+present users with curated options based on their preferred risk levels.
+Missions
+Astro can be sent on ‘Missions’ for a set cost, which could be an in-game currency cost (to be
+determined). These missions allow Astro to venture out of the cave for a certain duration,
+represented by a countdown timer.
+If you want Astro to return early, you can pay a fee to bring him back. This creates a dynamic
+similar to a pack-opening experience.
+Why send Astro on Missions?
+Astro could return with:
+● A LOT of tokens, average tokens or fewer tokens
+● NFTs
+● Big rewards or small rewards
+● Quest items
+Each mission holds the potential for surprises, making every adventure exciting and rewarding.
+The feature will require UI/UX design and a countdown timer. When Astro embarks on a
+mission, he will visually exit the cave and then disappear, with the process primarily handled
+through UI/UX elements. The rewards and items Astro brings back will be randomized upon his
+return.
+Missions will have a participation cost, but users will receive rewards in return. Additionally,
+there will need to be a bag/inventory system (similar to World of Warcraft) for Astro to carry
+and store the items he retrieves. This inventory will allow users to view and manage the items.
+Also this is where we need to add in like,comment, retweet to complete the mission. We will
+need to be able to add this manually every day on the backend to update to the new tweet for
+them to gain ‘x’ amount of in-game currency.
+Revenue Distribution
+- A portion or all of the revenue will be allocated to a pool. Once the pool reaches a
+certain threshold, the funds will be distributed randomly to participants who have used
+the protocol machines.
+- One idea being considered is using the pool to buy CWEB off the market and distribute
+it. Unknown at this stage.
+Revenue generated by the protocol, such as fees from the 'Swap ATM,' will be deposited into a
+separate wallet. The UI/UX will require a clean and intuitive design to display a counter at the
+top of the interface somewhere for all users to see. This counter will increment in real-time
+whenever funds are added/removed to the wallet. Additionally, a trigger mechanism will be
+implemented to distribute rewards when certain events occur, such as the completion of a
+mission where users earn rewards.
+Levelling system
+Every user will have access to the features and can earn XP by engaging with specific activities,
+which will help level Astro up. Astro's levels will range from 1 to 60 at the start.
+You can earn XP by completing ‘Missions’ and using the ‘Swap ATM’. (Additional XP-earning
+activities will be introduced in the future.)
+Looking at an idea that at a certain level Astro becomes ‘A real BOY’ (NFT) than tradable on
+marketplace as there is a benefit to a high level Astro:
+- Huge discounts on all trades
+- Bigger rewards
+- Special perks
+- Higher % APY on stakes assets.
+- + more
+Speaks for itself but needs a level guide just when you click on the level bar at top right
+explaining what rewards you get at which level.

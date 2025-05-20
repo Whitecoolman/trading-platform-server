@@ -1,0 +1,1017 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ASTRO BACKEND API",
+    "version": "1.0.0",
+    "description": "API documentation using Swagger"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    },
+    {
+      "url": "http://ec2-3-106-223-174.ap-southeast-2.compute.amazonaws.com"
+    },
+    {
+      "url": "https://meetastro.onrender.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication routes"
+    },
+    {
+      "name": "User",
+      "description": "User routes"
+    },
+    {
+      "name": "Mission",
+      "description": "Mission routes"
+    },
+    {
+      "name": "Query",
+      "description": "AI processing routes"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User registered successfully"
+          },
+          "400": {
+            "description": "User already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login a user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged in successfully"
+          },
+          "401": {
+            "description": "Invalid email or password"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/auth/forgot-password": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Send password reset link to user's email",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "The email address of the user requesting a password reset."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset link sent",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/auth/reset-password": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Reset user's password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "The password reset token received in the email."
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The new password for the user."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password has been reset",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or expired token"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/auth/google": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Authenticate user via Google OAuth",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "required": true,
+            "description": "The access token obtained from Google OAuth.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "image": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/user/reward": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Reward diamonds to a user based on their action",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "example": "follow_tiktok"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully with new diamond count",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "bentan010918@gmail.com"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "$2b$10$.gJn.azzjH1bfFGNkTHrzuzilOpuwdTDEDiQeB73Zn6VLIoB9o0A2"
+                      },
+                      "level": {
+                        "type": "integer",
+                        "example": 6
+                      },
+                      "xp": {
+                        "type": "integer",
+                        "example": 356
+                      },
+                      "winchance": {
+                        "type": "integer",
+                        "example": 80
+                      },
+                      "fee": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "gold": {
+                        "type": "integer",
+                        "example": 3643
+                      },
+                      "diamond": {
+                        "type": "integer",
+                        "example": 2140
+                      },
+                      "credit": {
+                        "type": "integer",
+                        "example": 200
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid action or user not found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/purchase-diamonds": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Purchase diamonds for a user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "example": 500
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully with new diamond count",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "bentan010918@gmail.com"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "$2b$10$.gJn.azzjH1bfFGNkTHrzuzilOpuwdTDEDiQeB73Zn6VLIoB9o0A2"
+                      },
+                      "level": {
+                        "type": "integer",
+                        "example": 6
+                      },
+                      "xp": {
+                        "type": "integer",
+                        "example": 356
+                      },
+                      "winchance": {
+                        "type": "integer",
+                        "example": 80
+                      },
+                      "fee": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "gold": {
+                        "type": "integer",
+                        "example": 2640
+                      },
+                      "diamond": {
+                        "type": "integer",
+                        "example": 2640
+                      },
+                      "credit": {
+                        "type": "integer",
+                        "example": 200
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Amount value needed or invalid user"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/increase-winchance": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Increase win chance using specified winChance and gold amount",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "winChance": {
+                    "type": "integer",
+                    "example": 82
+                  },
+                  "gold": {
+                    "type": "integer",
+                    "example": 100
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully with new win chance",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "bentan010918@gmail.com"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "$2b$10$.gJn.azzjH1bfFGNkTHrzuzilOpuwdTDEDiQeB73Zn6VLIoB9o0A2"
+                      },
+                      "level": {
+                        "type": "integer",
+                        "example": 9
+                      },
+                      "xp": {
+                        "type": "integer",
+                        "example": 356
+                      },
+                      "winchance": {
+                        "type": "integer",
+                        "example": 82
+                      },
+                      "fee": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.9
+                      },
+                      "gold": {
+                        "type": "integer",
+                        "example": 2643
+                      },
+                      "diamond": {
+                        "type": "integer",
+                        "example": 2640
+                      },
+                      "credit": {
+                        "type": "integer",
+                        "example": 200
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "winChance and gold required or invalid winChance"
+            },
+            "403": {
+              "description": "Insufficient gold"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/discount-fee": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Discount fee using gold",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated successfully with discounted fee",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "bentan010918@gmail.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "$2b$10$.gJn.azzjH1bfFGNkTHrzuzilOpuwdTDEDiQeB73Zn6VLIoB9o0A2"
+                    },
+                    "level": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "xp": {
+                      "type": "integer",
+                      "example": 356
+                    },
+                    "winchance": {
+                      "type": "integer",
+                      "example": 80
+                    },
+                    "fee": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 0.9
+                    },
+                    "gold": {
+                      "type": "integer",
+                      "example": 2643
+                    },
+                    "diamond": {
+                      "type": "integer",
+                      "example": 2640
+                    },
+                    "credit": {
+                      "type": "integer",
+                      "example": 200
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cannot discount fee at this level or insufficient gold"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/mission": {
+      "get": {
+        "tags": ["Mission"],
+        "summary": "Search for the current mission, which is a chest that is not open to authenticated users.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of missions available for the user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Find the lost treasure"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Locate the treasure chest hidden in the forest."
+                      },
+                      "able_to_open_chest_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-01-20T01:40:00Z"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-01-15T01:40:00Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-01-18T01:40:00Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No missions found for the user"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/mission/leaderboard": {
+      "get": {
+        "tags": ["Mission"],
+        "summary": "Retrieve the leaderboard for users (order by credit)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of results to return",
+            "schema": {
+              "type": "integer",
+              "example": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Offset for pagination",
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved leaderboard",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "leaderboard": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "playerOne"
+                          },
+                          "level": {
+                            "type": "integer",
+                            "example": 15
+                          },
+                          "xp": {
+                            "type": "integer",
+                            "example": 1200
+                          },
+                          "gold": {
+                            "type": "integer",
+                            "example": 5000
+                          },
+                          "diamond": {
+                            "type": "integer",
+                            "example": 150
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, e.g., invalid query parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid query parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mission/start": {
+      "post": {
+        "tags": ["Mission"],
+        "summary": "Start a new mission for the authenticated user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "missionType": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Mission started successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "mission": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 176
+                        },
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "start_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-01-19T16:43:39.285Z"
+                        },
+                        "end_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-01-19T16:46:39.285Z"
+                        },
+                        "mission_type": {
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "chest_number": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "able_to_open_chest_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": null
+                        },
+                        "opened_chest": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "credit": {
+                          "type": "integer",
+                          "example": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request due to validation errors"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/mission/back-astro": {
+      "post": {
+        "tags": ["Mission"],
+        "summary": "End a mission early by bringing back Astro",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "missionId": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mission ended successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "start_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-01-19T16:43:39.285Z"
+                    },
+                    "end_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-01-19T16:45:00.000Z"
+                    },
+                    "mission_type": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "chest_number": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "able_to_open_chest_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": null
+                    },
+                    "opened_chest": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "credit": {
+                      "type": "integer",
+                      "example": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request due to missing or invalid mission ID"
+          },
+          "404": {
+            "description": "Mission not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/query/generate-voice-answer": {
+      "post": {
+        "tags": ["Query"],
+        "summary": "Generate voice answer",
+        "description": "Generates a voice answer based on the user's query.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "example": "What is your name?"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "botResponse": {
+                        "type": "string",
+                        "example": "You can call me AI Astro, your personal 3D AI avatar! I bring together AI, gaming, entertainment, and decentralized finance (DeFi) into one awesome experience."
+                      },
+                      "audioUrl": {
+                        "type": "string",
+                        "example": "https://meetastro.onrender.com/Answer_1736973948673.mp3"
+                      },
+                      "audioDuration": {
+                        "type": "string",
+                        "example": "12.772"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Error occurred"
+            }
+          }
+        }
+      }
+    }
+  }
+}

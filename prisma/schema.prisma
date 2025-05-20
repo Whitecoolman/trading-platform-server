@@ -1,0 +1,153 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  email     String
+  password  String?
+  picture   String?
+  profile   Profile     @relation(fields: [profileId], references: [id])
+  profileId Int         @unique
+  MTAccount MTAccount[]
+  Webhook   Webhook[]
+  Trades    Trades[]
+  Alert     Alert[]
+  Payment   Payment[]
+}
+
+model Payment {
+  id           Int     @id @default(autoincrement())
+  userId       Int
+  role         String?
+  accountCount Int?
+  product_id   String?
+  user         User?   @relation(fields: [userId], references: [id])
+}
+
+model Profile {
+  id                 Int      @id @default(autoincrement())
+  name               String?
+  bio                String?
+  tradingViewAccount String?
+  twitterAccount     String?
+  youtubeChannel     String?
+  youtubeUserName    String?
+  websiteURL         String?
+  publicUserName     String?
+  publicRole         Boolean? @default(false)
+  user               User?
+}
+
+model MTAccount {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  accountId   String   @unique
+  accountName String
+  brokerName  String
+  platform    String
+  server      String
+  login       String
+  password    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [id])
+}
+
+model Webhook {
+  id                      Int       @id @default(autoincrement())
+  userId                  Int
+  accountId_m             String?
+  accountId_t             String?
+  webhookName             String
+  webhookMode             String
+  symbol                  String
+  orderDirection          String?
+  orderType               String?
+  volume                  Float
+  stopLoss_pips           Float?
+  takeProfit_pips         Float?
+  openPrice_pips          Float?
+  stopLimit_pips          Float?
+  trailingStopLoss        Float?
+  modifyType              String?
+  moveStopLoss_pips       Float?
+  moveTakeProfit_pips     Float?
+  partialClose            Float?
+  allTrades               Boolean   @default(false)
+  multiTakeProfits_pips   Float[]
+  trailingDistance_pips   Float?
+  activationTrigger_pips  Float?
+  timeBasedExitMinute     Float?
+  breakenEvenSetting_pips Float?
+  orderId                 String?
+  positionId              String?
+  hashedWebhook           String
+  tradeExecutionTime      DateTime?
+  tradeStartTime          DateTime?
+  appName                 String?
+  accNum                  String?
+  accountType             String?
+  refreshToken            String?
+  isActive                Boolean   @default(false)
+  isPublic                Boolean   @default(false)
+  connectionStatus        Boolean   @default(false)
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  user                    User?     @relation(fields: [userId], references: [id])
+}
+
+model Trades {
+  id          Int    @id @default(autoincrement())
+  userId      Int
+  accountId   String
+  closePrice  Float
+  closeTime   String
+  gain        Float
+  marketValue Float
+  openPrice   Float
+  openTime    String
+  pips        Float
+  positionId  String
+  profit      Float
+  success     String
+  symbol      String
+  type        String
+  volume      Float
+  user        User?  @relation(fields: [userId], references: [id])
+
+  @@unique([accountId, positionId, type])
+}
+
+model Alert {
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  orderType      String
+  webhookName    String
+  webhookMode    String
+  symbol         String
+  orderDirection String?
+  appName        String?
+  volume         Float
+  takeProfit     Float?
+  stopLoss       Float?
+  positionId_m   String?
+  positionId_t   String?
+  tradeStartTime DateTime?
+  messageData    String?
+  view           Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User?     @relation(fields: [userId], references: [id])
+}

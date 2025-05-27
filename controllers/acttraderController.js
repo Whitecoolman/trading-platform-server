@@ -1,5 +1,7 @@
 const prisma = require("../config/prisma")
 const axios = require("axios");
+const digestClient = require("digest-auth-request");
+
 require("dotenv").config();
 
 async function DefineURL(accountType) {
@@ -15,21 +17,16 @@ async function DefineURL(accountType) {
 async function  LoginAccount(req, res) {
     try{
       const {username, password, accountType} = req.body;
+      const client = new digestClient(username, password);
       const baseURL = await DefineURL(accountType);
-      const authResponse = await axios.get(
-        `${baseURL}/auth/jwt/token`,
-        {
-          username,
-          password
-        },
-        {
-          headers : {
-            "Content-Type" : "application/json"
-          }
-        }
-      );
-      const accessToken = authResponse.data.accessToken;
-      res.status(200).json({
+      const authResponse = await client.request({
+          url : baseURL,
+          method : "Get"
+    });
+    authResponse = JSON.parse(authResponse);
+    const accessToken = authResponse.result;
+    console.log("Token : ", data.result);
+    res.status(200).json({
         status : 200,
         data: {
           accessToken,
@@ -50,13 +47,9 @@ async function  LoginAccount(req, res) {
 
 async function GetAllAccounts(req, res) {
     try{
-      const {accessToken, accessType} = req.body;
-      const baseURL = await DefineURL(accessType);
-      console.log("-------ok------>");
-      const response =  await axios.get(`${baseURL}/auth/jwt/all-accounts`, {
-        headers : {
-          Authorization : `Bearer ${accessToken}`,
-          "Content-Type" : "application/json"
+      const response = await axios.get(`${baseURL}/api/v2/account/accounts`, {
+        params: {
+          token : accessToken
         }
       });
       const accounts = response.data;

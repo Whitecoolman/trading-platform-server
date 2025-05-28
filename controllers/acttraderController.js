@@ -23,9 +23,10 @@ async function  LoginAccount(req, res) {
           url : baseURL,
           method : "Get"
     });
+    console.log("authresponse", authResponse);
     authResponse = JSON.parse(authResponse);
     const accessToken = authResponse.result;
-    console.log("Token : ", data.result);
+    console.log("Token : ", authResponse.result);
     res.status(200).json({
         status : 200,
         data: {

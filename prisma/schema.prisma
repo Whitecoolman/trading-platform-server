@@ -70,6 +70,7 @@ model Webhook {
   userId                  Int
   accountId_m             String?
   accountId_t             String?
+  accountId_a             String?
   webhookName             String
   webhookMode             String
   symbol                  String
@@ -144,6 +145,7 @@ model Alert {
   stopLoss       Float?
   positionId_m   String?
   positionId_t   String?
+  positionId_a   String?
   tradeStartTime DateTime?
   messageData    String?
   view           Boolean   @default(false)

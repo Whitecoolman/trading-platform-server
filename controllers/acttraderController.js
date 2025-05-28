@@ -4,8 +4,10 @@ const digestClient = require("digest-auth-request");
 
 require("dotenv").config();
 
+
 async function DefineURL(accountType) {
     let baseURL = "";
+    const accountType = "Live";
     if (accountType == "DEMO"){
       baseURL = process.env.ACTTRADER_DEMO_BASE_URL;
     } else {
@@ -14,16 +16,20 @@ async function DefineURL(accountType) {
     return baseURL;
 }
 
-async function  LoginAccount(req, res) {
+async function LoginAccount(req, res) {
     try{
-      const {username, password, accountType} = req.body;
+      const username = "T283490";
+      const password = "83429856";
+      const accountType = "Live";
+      // const {username, password, accountType} = req.body;
+      console.log("😀");
       const client = new digestClient(username, password);
       const baseURL = await DefineURL(accountType);
-      const authResponse = await client.request({
+      const authResponse = client.request({
           url : baseURL,
           method : "Get"
     });
-    console.log("authresponse", authResponse);
+    console.log("☮authresponse", authResponse);
     authResponse = JSON.parse(authResponse);
     const accessToken = authResponse.result;
     console.log("Token : ", authResponse.result);

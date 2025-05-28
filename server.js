@@ -19,6 +19,7 @@ const profileRoute = require("./routes/profileRoute");
 const metaRoute = require("./routes/metaRoute");
 const webhookRoute = require("./routes/webhookRoute");
 const metaStatsRoute = require("./routes/metaStatsRoute");
+const acttraderRoute = require("./routes/acttraderRoute");
 const tradeRoute = require("./routes/tradeRoute");
 const alertRoute = require("./routes/alertRoute");
 const tradelockerRoute = require("./routes/tradelockerRoute");
@@ -88,6 +89,7 @@ app.use("/api/trade", authMiddleware, tradeRoute);
 app.use("/api/alert", alertRoute);
 app.use("/api/tradelocker", authMiddleware, tradelockerRoute);
 app.use("/api/payment", authMiddleware, paymentRoute);
+app.use("/api/acttrader", authMiddleware, acttraderRoute)
 
 app.use("/", express.static(path.join(__dirname, "uploads")));
 

@@ -3,6 +3,7 @@ const MetaApi = require("metaapi.cloud-sdk");
 const mt4_symbols = require("../config/symbols");
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
+const { token } = require("morgan");
 
 require("dotenv").config;
 
@@ -2069,6 +2070,145 @@ async function getAccessToken(baseURL, refreshToken) {
   };
 }
 
+//-------------------------Acttrader Function--------------------
+
+async function cancelorderacttrader(
+  baseURL,
+  orderNum,
+  accessToken
+) {
+  await axios.get(
+    `${baseURL}/api/v2/trading/cancelorder?token=${accessToken}&order=${orderNum}`
+  )
+}
+
+async function closetradeacttrader(
+  baseURL,
+  accessToken,
+  trade,
+  quantity,
+  hedge
+) {
+  await axios.get(`${baseURL}/api/v2/trading/closetrade?token=${accessToken}&trade=${trade}quantity=${quantity}&hedge=${hedge}`)  
+}
+
+async function hedgetradeacttrader(
+  baseURL,
+  accessToken,
+  trade,
+  quantity,
+) {
+  await axios.get(`${baseURL}/api/v2/trading/hedgetrade?token=${accessToken}&trade=${trade}&quantity=${quantity}`)
+}
+
+async function modifyorderacttrader(
+  baseURL,
+  accessToken,
+  order,
+  price,
+  quantity
+) {
+  await axios.get(`${baseURL}/api/v2/trading/modifyorder?token=${accessToken}&order=${order}&price=${price}&quantity=${quantity}`)
+}
+
+async function openordersacttrader(
+  baseURL,
+  accessToken
+) {
+    await axios.get(`${baseURL}/api/v2/trading/openorders?token=${accessToken}`)
+}
+
+async function opentradesacttrader(
+  baseURL,
+  accessToken
+) {
+  await axios.get(`${baseURL}/api/v2/tradomg/opentrades?token=${accessToken}`)
+}
+
+async function placemarketacttrader(
+  baseURL,
+  accessToken,
+  symbol,
+  quantity,
+  side,
+  account,
+  stop,
+  limit,
+  trail,
+  commentary
+) {
+  await axios.get(`${baseURL}/api/v2/trading/placemarket?token=${accessToken}&symbol=${symbol}&quantity=${quantity}&side=${side}&account=${account}&stop=${stop}&limit=${limit}&trail=${trail}&commentary=${commentary}`)
+}
+
+async function placependingacttrader(
+  baseURL,
+  accessToken,
+  symbol,
+  quantity,
+  side,
+  account,
+  price,
+  stop,
+  limit,
+  trail,
+  commentary
+) {
+  await axios.get(`${baseURL}/api/v2/trading/placepending?token=${accessToken}&symbol=${symbol}&quantity=${quantity}&side=${side}&account=${account}&price=${price}&stop=${stop}&limit=${limit}&trail=${trail}&commentary=${commentary}`) 
+}
+
+async function placelimitacttrader(
+  baseURL,
+  accessToken,
+  trade,
+  order,
+  price,
+  pips
+) {
+  await axios.get(`${baseURL}/api/v2/trading/placelimit?token=${accessToken}&trade=${trade}&order=${order}&price=${price}&pips=${pips}`)
+}
+
+async function placestopacttrader(
+  baseURL,
+  accessToken,
+  trade,
+  order,
+  price,
+  pips
+) {
+  await axios.get(`${baseURL}/api/v2/trading/placestop?token=${accessToken}&trade=${trade}&order=${order}&price=${price}&pips=${pips}`)
+}
+
+async function placetrailacttrader(
+  baseURL,
+  accessToken,
+  trade,
+  order,
+  trail
+) {
+  await axios.get(`${baseURL}/api/v2/trading/placetrail?token=${accessToken}&trade=${trade}&order=${order}&trail=${trail}`)
+}
+
+
+async function removedordersacttrader(
+  baseURL,
+  accessToken,
+  from,
+  till,
+  order,
+  account) {
+    await axios.get(`${baseURL}/api/v2/trading/removeorders?token=${accessToken}&from=${from}&till=${till}&order=${order}&account=${account}`)
+}
+
+async function tradehistoryacttrader(
+  baseURL,
+  accessToken,
+  from,
+  till,
+  account,
+  tradeId
+) {
+  axios.get(`${baseURL}/api/v2/trading/tradehistory?token=${accessToken}&from=${from}&till=${till}&account=${account}&tradeId=${tradeId}`)
+}
 module.exports = {
   GetSymbols,
 
@@ -2105,4 +2245,19 @@ module.exports = {
   closeOrderTradelocker,
 
   openTradeUpdatedWebhook,
+
+  //acttrader function
+  cancelorderacttrader,
+  closetradeacttrader,
+  hedgetradeacttrader,
+  modifyorderacttrader,
+  openordersacttrader,
+  opentradesacttrader,
+  placemarketacttrader,
+  placependingacttrader,
+  placelimitacttrader,
+  placestopacttrader,
+  placetrailacttrader,
+  removedordersacttrader,
+  tradehistoryacttrader
 };

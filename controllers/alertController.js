@@ -71,6 +71,7 @@ async function OpenTradeByAlert(req, res) {
         data: {
           positionId_m: result.positionId_m,
           positionId_t: result.positionId_t,
+          positionId_a: result.positionId_a,
           tradeStartTime: result.tradeStartTime,
         },
         select: {
@@ -85,6 +86,7 @@ async function OpenTradeByAlert(req, res) {
           messageData: true,
           positionId_m: true,
           positionId_t: true,
+          positionId_a: true,
           tradeStartTime: true,
         },
       });
@@ -180,6 +182,7 @@ async function OpenBasicTradeByWebhook(hashedWebhook) {
   try {
     let result_m = {};
     let result_t = {};
+    let result_a = {};
     const currentDate = new Date();
     const existingWebhook = await prisma.webhook.findFirst({
       where: {
@@ -304,6 +307,13 @@ async function OpenBasicTradeByWebhook(hashedWebhook) {
         existingWebhook.accNum
       );
       console.log("🎈tradelocker success");
+    }
+    if (existingWebhook.accountId_a){
+        const baseURL = await DefineURL(existingWebhook.accountType);
+        const tokenResult = await getAccessToken(
+          baseURL,
+          existingWebhook
+        )
     }
     return {
       positionId_m: result_m.orderId,

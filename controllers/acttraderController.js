@@ -26,7 +26,7 @@ async function LoginAccount(req, res) {
     const options = {
       method: 'GET',
     };
-    const response = await client.fetch(`${baseURL}/auth/token`, options);
+    const response = await client.fetch(`${baseURL}/auth/token?lifetime=20`, options);
     const authResponse = await response.json();
     console.log("Auth response:", authResponse.result);
     const accessToken = authResponse.result;

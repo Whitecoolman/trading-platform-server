@@ -24,6 +24,7 @@ require("dotenv").config();
 async function OpenTradeByAlert(req, res) {
   try {
     const { hashedWebhook } = req.params;
+    console.log("🤔",req);
     const alertMessage = req.body;
     const existingWebhook = await prisma.webhook.findFirst({
       where: {
@@ -112,12 +113,13 @@ async function GetAllAlerts(req, res) {
       },
     });
 
-    console.log(existingUser.id);
+    console.log("existingUser ----------->",existingUser);
     const alerts = await prisma.alert.findMany({
       where: {
         userId: existingUser.id,
       },
     });
+    console.log("alert --------------->", alerts);
     res.status(200).json({
       status: "success",
       data: {
@@ -189,6 +191,7 @@ async function OpenBasicTradeByWebhook(hashedWebhook) {
         hashedWebhook,
       },
     });
+    console.log("😎😋😊", existingWebhook);
     if (existingWebhook.accountId_m) {
       const connection = await GetConnectionFromMap(
         existingWebhook.accountId_m
@@ -309,11 +312,18 @@ async function OpenBasicTradeByWebhook(hashedWebhook) {
       console.log("🎈tradelocker success");
     }
     if (existingWebhook.accountId_a){
-        const baseURL = await DefineURL(existingWebhook.accountType);
-        const tokenResult = await getAccessToken(
-          baseURL,
-          existingWebhook
-        )
+        const Atuser = await prisma.AtUser.findFirst({
+
+        })
+        const client = new DigestClient(username, password);
+        const baseURL = await DefineURL(accountType);
+        console.log("😀", `${baseURL}/auth/token`);
+        const options = {
+          method: 'GET',
+        };
+        const response = await client.fetch(`${baseURL}/auth/token?lifetime=20`, options);
+        const authResponse = await response.json();
+        
     }
     return {
       positionId_m: result_m.orderId,
@@ -451,6 +461,7 @@ async function OpenPremiumTradeByWebhook(hashedWebhook) {
     return {
       positionId_m: result_m.join(","),
       positionId_t: result_t.join(","),
+      positionId_a: result_a.join(","),
       tradeStartTime: currentDate,
     };
   } catch (err) {

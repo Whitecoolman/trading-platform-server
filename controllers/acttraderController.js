@@ -20,22 +20,31 @@ async function LoginAccount(req, res) {
   try {
     const { username, password, accountType } = req.body;
     console.log("😀", req.body);
+    const newUser = await prisma.AtUser.create({
+      data: {
+        username: username,
+        password: password,
+        accountType: accountType,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+    });
     const client = new DigestClient(username, password);
     const baseURL = await DefineURL(accountType);
     console.log("😀", `${baseURL}/auth/token`);
     const options = {
       method: 'GET',
     };
-    const response = await client.fetch(`${baseURL}/auth/token?lifetime=20`, options);
+    const response = await client.fetch(`${baseURL}/auth/token`, options);
     const authResponse = await response.json();
     console.log("Auth response:", authResponse.result);
-    const accessToken = authResponse.result;
+    const AtaccessToken = authResponse.result;
 
     res.status(200).json({
       status: 200,
       message: "ok!",
       data: {
-        accessToken,
+        AtaccessToken,
         user: {
           username,
           accountType
@@ -53,12 +62,12 @@ async function LoginAccount(req, res) {
 
 async function GetAllAccounts(req, res) {
   try {
-    const {accessToken,accountType} = req.body;
+    const {AtaccessToken,accountType} = req.body;
     const baseURL = await DefineURL(accountType);
-    console.log("😗", `${baseURL}/account/accounts`, "    ", accessToken);
+    console.log("😗", `${baseURL}/account/accounts`, "    ", AtaccessToken);
     const response = await axios.get(`${baseURL}/account/accounts`, {
       params: {
-        token: accessToken
+        token: AtaccessToken
       }
     });
     console.log("🙄", response.data);

@@ -26,6 +26,14 @@ model User {
   Alert     Alert[]
   Payment   Payment[]
 }
+model AtUser{
+  id        Int         @id @default(autoincrement())
+  username String
+  password String
+  accountType String
+  createdAt DateTime
+  updatedAt DateTime
+}
 
 model Payment {
   id           Int     @id @default(autoincrement())
@@ -100,6 +108,7 @@ model Webhook {
   appName                 String?
   accNum                  String?
   accountType             String?
+  AtaccountType           String?
   refreshToken            String?
   isActive                Boolean   @default(false)
   isPublic                Boolean   @default(false)

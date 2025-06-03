@@ -380,6 +380,7 @@ async function ConnectWebhook(req, res) {
       accNum,
       accountType,
       refreshToken,
+      AtaccountType
     } = req.body;
     console.log("---req.body----->", req.body);
 
@@ -388,6 +389,7 @@ async function ConnectWebhook(req, res) {
         email,
       },
     });
+    console.log("existinUser-------->", existingUser);
     const webhookFilter = {
       userId: existingUser.id,
       webhookName,
@@ -397,12 +399,18 @@ async function ConnectWebhook(req, res) {
     const existingWebhook = await prisma.webhook.findFirst({
       where: webhookFilter,
     });
-    let accountId_m = existingWebhook.accountId_m,
-      accountId_t = existingWebhook.accountId_t;
+    
+    let accountId_m = existingWebhook.accountId_m
+    let accountId_t = existingWebhook.accountId_t;
+    let accountId_a = existingWebhook.accountId_a;
     if (appName == "MetaTrader") {
       accountId_m = accountId;
     } else if (appName == "TradeLocker") {
       accountId_t = accountId;
+    }
+    else if (appName == "ActTrader")
+      {
+      accountId_a = accountId;
     }
 
     if (appName == "MetaTrader") {
@@ -424,17 +432,20 @@ async function ConnectWebhook(req, res) {
       data: {
         accountId_m,
         accountId_t,
+        accountId_a,
         connectionStatus: true,
         isActive: true,
         appName,
         accNum,
         accountType,
         refreshToken,
+        AtaccountType,
       },
       select: {
         id: true,
         accountId_m: true,
         accountId_t: true,
+        accountId_a: true,
         webhookName: true,
         symbol: true,
         webhookMode: true,
@@ -464,7 +475,7 @@ async function ConnectWebhook(req, res) {
         hashedWebhook: true,
       },
     });
-
+    console.log("existingWebhook-------->", existingWebhook);
     res.status(200).json({
       status: "success",
       code: 200,
@@ -550,6 +561,7 @@ async function UpdateBasicWebhook(req, res) {
         id: true,
         accountId_m: true,
         accountId_t: true,
+        accountId_a: true,
         webhookName: true,
         symbol: true,
         webhookMode: true,
@@ -643,6 +655,7 @@ async function UpdatePremiumWebhook(req, res) {
         id: true,
         accountId_m: true,
         accountId_t: true,
+        accountId_a: true,
         webhookName: true,
         symbol: true,
         webhookMode: true,
@@ -727,6 +740,7 @@ async function UpdateAdvancedWebhook(req, res) {
         id: true,
         accountId_m: true,
         accountId_t: true,
+        accountId_a: true,
         webhookName: true,
         symbol: true,
         webhookMode: true,
@@ -852,6 +866,9 @@ async function OpenBasicTrade(req, res) {
       if (existingWebhook.accountId_t) {
         const baseURL = await DefineURL(accountType);
         console.log("---actionType---tradelocker---->", actionType);
+        console.log("accountId_t------------->", existingWebhook.accountId_t);
+        console.log("accessToken-------->", accessToken);
+        console.log("existingWebhook->>>>>>,",existingWebhook);
         const instrument = await getInstrumentTradelocker(
           baseURL,
           existingWebhook.accountId_t,
@@ -1394,6 +1411,7 @@ async function GetWebhooks(req, res) {
         id: true,
         accountId_m: true,
         accountId_t: true,
+        accountId_a: true,
         webhookName: true,
         symbol: true,
         webhookMode: true,
@@ -1498,12 +1516,16 @@ async function DisconnectWebhook(req, res) {
     });
     let accountId_m = existingWebhook.accountId_m;
     let accountId_t = existingWebhook.accountId_t;
+    let accountId_a = existingWebhook.accountId_a;
     if (appName == "MetaTrader") {
       accountId_m = "";
     } else if (appName == "TradeLocker") {
       accountId_t = "";
     }
-    console.log("existing----->", appName, accountId_m, accountId_t);
+    else {
+      accountId_a = "";
+    }
+    console.log("existing----->", appName, accountId_m, accountId_t, accountId_a);
     let connectionStatus = !accountId_m && !accountId_t ? false : true;
     const updatedWebhook = await prisma.webhook.update({
       where: {
@@ -1512,6 +1534,7 @@ async function DisconnectWebhook(req, res) {
       data: {
         accountId_m,
         accountId_t,
+        accountId_a,
         connectionStatus,
         isActive: false,
         isPublic: false,
@@ -1522,6 +1545,7 @@ async function DisconnectWebhook(req, res) {
         id: true,
         accountId_m: true,
         accountId_t: true,
+        accountId_a: true,
         webhookName: true,
         symbol: true,
         webhookMode: true,
@@ -1585,6 +1609,7 @@ async function openTradeUpdatedWebhook(currentDate, existingWebhook) {
       id: true,
       accountId_m: true,
       accountId_t: true,
+      accountId_a: true,
       webhookName: true,
       symbol: true,
       webhookMode: true,

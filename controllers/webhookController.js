@@ -425,6 +425,7 @@ async function ConnectWebhook(req, res) {
           .json({ status: "error", message: "This account is not found" });
       await GetConnectionFromMap(accountId_m);
     }
+    if(AtaccountType){
     updatedWebhook = await prisma.webhook.update({
       where: {
         id: existingWebhook.id,
@@ -436,9 +437,6 @@ async function ConnectWebhook(req, res) {
         connectionStatus: true,
         isActive: true,
         appName,
-        accNum,
-        accountType,
-        refreshToken,
         AtaccountType,
       },
       select: {
@@ -474,8 +472,59 @@ async function ConnectWebhook(req, res) {
         breakenEvenSetting_pips: true,
         hashedWebhook: true,
       },
-    });
-    console.log("existingWebhook-------->", existingWebhook);
+    });}
+    if(accountType){
+      updatedWebhook = await prisma.webhook.update({
+        where: {
+          id: existingWebhook.id,
+        },
+        data: {
+          accountId_m,
+          accountId_t,
+          accountId_a,
+          connectionStatus: true,
+          isActive: true,
+          appName,
+          accNum,
+          accountType,
+          refreshToken,
+        },
+        select: {
+          id: true,
+          accountId_m: true,
+          accountId_t: true,
+          accountId_a: true,
+          webhookName: true,
+          symbol: true,
+          webhookMode: true,
+          connectionStatus: true,
+          orderDirection: true,
+          orderType: true,
+          isActive: true,
+          isPublic: true,
+          tradeExecutionTime: true,
+          volume: true,
+          stopLoss_pips: true,
+          takeProfit_pips: true,
+          openPrice_pips: true,
+          stopLimit_pips: true,
+          trailingStopLoss: true,
+          modifyType: true,
+          moveStopLoss_pips: true,
+          moveTakeProfit_pips: true,
+          partialClose: true,
+          allTrades: true,
+          appName: true,
+          multiTakeProfits_pips: true,
+          trailingDistance_pips: true,
+          activationTrigger_pips: true,
+          timeBasedExitMinute: true,
+          breakenEvenSetting_pips: true,
+          hashedWebhook: true,
+        },
+      });
+    }
+    console.log("updatedWebhook-------->", existingWebhook);
     res.status(200).json({
       status: "success",
       code: 200,
@@ -798,7 +847,9 @@ async function OpenBasicTrade(req, res) {
       actionType,
       allTrades,
       trailingStopLoss,
+      AtaccessToken,
     } = req.body;
+    console.log("✨✨req", req.body);
     let result = {};
     const currentDate = new Date();
     let updatedWebhook = {};
@@ -817,7 +868,7 @@ async function OpenBasicTrade(req, res) {
         orderType,
       },
     });
-
+    console.log("existingWebhook--------------->", existingWebhook);
     if (actionType == "create") {
       if (existingWebhook.accountId_m) {
         let accountId = existingWebhook.accountId_m;
@@ -936,6 +987,13 @@ async function OpenBasicTrade(req, res) {
           console.log("🎈success! tradelocker");
         }
       }
+      if(existingWebhook.accountId_a) {
+        console.log("🙌 AtaccountType", existingWebhook.AtaccountType);
+        console.log("ataccessToken----------> ", AtaccessToken);
+        const AtbaseURL = await DefineURL(AtaccountType);
+        const result = opentradesacttrader(AtbaseURL, existingWebhook.AtaccessToken);
+        console.log("🙌success! Acttrader", result);
+      }
       updatedWebhook = await openTradeUpdatedWebhook(
         currentDate,
         existingWebhook
@@ -945,7 +1003,7 @@ async function OpenBasicTrade(req, res) {
         code: 200,
         message: `${String(
           orderType
-        ).toUpperCase()} Order (Metatrader, Tradelocker) has been executed`,
+        ).toUpperCase()} Order has been executed`,
         data: { updatedWebhook },
       });
     } else if (actionType == "modify") {
@@ -2090,7 +2148,7 @@ async function getAccessToken(baseURL, refreshToken) {
   const accessToken_r = resAccessToken.data.accessToken;
   const refreshToken_r = resAccessToken.data.refreshToken;
   return {
-    accessToken: accessToken_r,
+    accessToken: AtaccountToken_r,
     refreshToken: refreshToken_r,
   };
 }
@@ -2100,59 +2158,59 @@ async function getAccessToken(baseURL, refreshToken) {
 async function cancelorderacttrader(
   baseURL,
   orderNum,
-  accessToken
+  AtaccessToken
 ) {
   await axios.get(
-    `${baseURL}/api/v2/trading/cancelorder?token=${accessToken}&order=${orderNum}`
+    `${baseURL}/api/v2/trading/cancelorder?token=${AtaccessToken}&order=${orderNum}`
   )
 }
 
 async function closetradeacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   trade,
   quantity,
   hedge
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/closetrade?token=${accessToken}&trade=${trade}quantity=${quantity}&hedge=${hedge}`)  
+  await axios.get(`${baseURL}/api/v2/trading/closetrade?token=${AtaccessToken}&trade=${trade}quantity=${quantity}&hedge=${hedge}`)  
 }
 
 async function hedgetradeacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   trade,
   quantity,
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/hedgetrade?token=${accessToken}&trade=${trade}&quantity=${quantity}`)
+  await axios.get(`${baseURL}/api/v2/trading/hedgetrade?token=${AtaccessToken}&trade=${trade}&quantity=${quantity}`)
 }
 
 async function modifyorderacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   order,
   price,
   quantity
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/modifyorder?token=${accessToken}&order=${order}&price=${price}&quantity=${quantity}`)
+  await axios.get(`${baseURL}/api/v2/trading/modifyorder?token=${AtaccessToken}&order=${order}&price=${price}&quantity=${quantity}`)
 }
 
 async function openordersacttrader(
   baseURL,
-  accessToken
+  AtaccessToken
 ) {
-    await axios.get(`${baseURL}/api/v2/trading/openorders?token=${accessToken}`)
+    await axios.get(`${baseURL}/api/v2/trading/openorders?token=${AtaccessToken}`)
 }
 
 async function opentradesacttrader(
   baseURL,
-  accessToken
+  AtaccessToken
 ) {
-  await axios.get(`${baseURL}/api/v2/tradomg/opentrades?token=${accessToken}`)
+  await axios.get(`${baseURL}/api/v2/tradomg/opentrades?token=${AtaccessToken}`)
 }
 
 async function placemarketacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   symbol,
   quantity,
   side,
@@ -2162,12 +2220,12 @@ async function placemarketacttrader(
   trail,
   commentary
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/placemarket?token=${accessToken}&symbol=${symbol}&quantity=${quantity}&side=${side}&account=${account}&stop=${stop}&limit=${limit}&trail=${trail}&commentary=${commentary}`)
+  await axios.get(`${baseURL}/api/v2/trading/placemarket?token=${AtaccessToken}&symbol=${symbol}&quantity=${quantity}&side=${side}&account=${account}&stop=${stop}&limit=${limit}&trail=${trail}&commentary=${commentary}`)
 }
 
 async function placependingacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   symbol,
   quantity,
   side,
@@ -2178,61 +2236,61 @@ async function placependingacttrader(
   trail,
   commentary
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/placepending?token=${accessToken}&symbol=${symbol}&quantity=${quantity}&side=${side}&account=${account}&price=${price}&stop=${stop}&limit=${limit}&trail=${trail}&commentary=${commentary}`) 
+  await axios.get(`${baseURL}/api/v2/trading/placepending?token=${AtaccessToken}&symbol=${symbol}&quantity=${quantity}&side=${side}&account=${account}&price=${price}&stop=${stop}&limit=${limit}&trail=${trail}&commentary=${commentary}`) 
 }
 
 async function placelimitacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   trade,
   order,
   price,
   pips
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/placelimit?token=${accessToken}&trade=${trade}&order=${order}&price=${price}&pips=${pips}`)
+  await axios.get(`${baseURL}/api/v2/trading/placelimit?token=${AtaccessToken}&trade=${trade}&order=${order}&price=${price}&pips=${pips}`)
 }
 
 async function placestopacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   trade,
   order,
   price,
   pips
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/placestop?token=${accessToken}&trade=${trade}&order=${order}&price=${price}&pips=${pips}`)
+  await axios.get(`${baseURL}/api/v2/trading/placestop?token=${AtaccessToken}&trade=${trade}&order=${order}&price=${price}&pips=${pips}`)
 }
 
 async function placetrailacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   trade,
   order,
   trail
 ) {
-  await axios.get(`${baseURL}/api/v2/trading/placetrail?token=${accessToken}&trade=${trade}&order=${order}&trail=${trail}`)
+  await axios.get(`${baseURL}/api/v2/trading/placetrail?token=${AtaccessToken}&trade=${trade}&order=${order}&trail=${trail}`)
 }
 
 
 async function removedordersacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   from,
   till,
   order,
   account) {
-    await axios.get(`${baseURL}/api/v2/trading/removeorders?token=${accessToken}&from=${from}&till=${till}&order=${order}&account=${account}`)
+    await axios.get(`${baseURL}/api/v2/trading/removeorders?token=${AtaccessToken}&from=${from}&till=${till}&order=${order}&account=${account}`)
 }
 
 async function tradehistoryacttrader(
   baseURL,
-  accessToken,
+  AtaccessToken,
   from,
   till,
   account,
   tradeId
 ) {
-  axios.get(`${baseURL}/api/v2/trading/tradehistory?token=${accessToken}&from=${from}&till=${till}&account=${account}&tradeId=${tradeId}`)
+  axios.get(`${baseURL}/api/v2/trading/tradehistory?token=${AtaccessToken}&from=${from}&till=${till}&account=${account}&tradeId=${tradeId}`)
 }
 module.exports = {
   GetSymbols,

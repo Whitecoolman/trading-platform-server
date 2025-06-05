@@ -3,6 +3,7 @@ const express = require("express");
 const {
     LoginAccount,
     GetAllAccounts,
+    GetAllAccounts2
 } = require("../controllers/acttraderController");
 
 const router = express.Router();

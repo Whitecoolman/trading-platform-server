@@ -113,13 +113,13 @@ async function GetAllAlerts(req, res) {
       },
     });
 
-    console.log("existingUser ----------->",existingUser);
+    // console.log("existingUser ----------->",existingUser);
     const alerts = await prisma.alert.findMany({
       where: {
         userId: existingUser.id,
       },
     });
-    console.log("alert --------------->", alerts);
+    // console.log("alert --------------->", alerts);
     res.status(200).json({
       status: "success",
       data: {
